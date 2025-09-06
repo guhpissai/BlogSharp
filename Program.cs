@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Blog.Repositories;
+using Blog.Models;
 
 internal class Program
 {
@@ -9,28 +10,47 @@ internal class Program
   {
     var connection = new SqlConnection(STRINGCONNECTION_STRING);
     connection.Open();
-    ReadUsers(connection);
-    ReadRoles(connection);
+    GetUsersWithRoles(connection);
+    // ReadRoles(connection);
     connection.Close();
   }
 
   static void ReadUsers(SqlConnection connection)
   {
-    var repository = new UserRepository(connection);
+    var repository = new Repository<User>(connection);
 
-    var users = repository.Get();
+    var items = repository.Get();
 
-    foreach (var user in users)
-      Console.WriteLine($"{user.Name}");
+    foreach (var item in items)
+      Console.WriteLine($"{item.Name}");
   }
 
   static void ReadRoles(SqlConnection connection)
   {
-    var repository = new RoleRepository(connection);
+    var repository = new Repository<Role>(connection);
 
-    var roles = repository.Get();
+    var items = repository.Get();
 
-    foreach (var role in roles)
-      Console.WriteLine($"{role.Name}");
+    foreach (var item in items)
+      Console.WriteLine($"{item.Name}");
+  }
+
+  static void GetUsersWithRoles(SqlConnection connection)
+  {
+    var userRepository = new UserRepository(connection);
+
+    var users = userRepository.GetUsersWithRoles();
+
+    foreach (var user in users)
+    {
+      var roles = new List<string>();
+      foreach (var role in user.Roles)
+      {
+        if (role != null && role.Name != null)
+          roles.Add(role.Name);
+      }
+
+      Console.WriteLine($"Nome: {user.Name} - Roles: {string.Join(", ", roles)}");
+    }
   }
 }

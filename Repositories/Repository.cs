@@ -16,5 +16,16 @@ namespace Blog.Repositories
       => _connection.Get<TModel>(id);
     public void Create(TModel model)
       => _connection.Insert(model);
+
+    public void Delete(TModel model)
+      => _connection.Delete(model);
+
+    public void Delete(int id)
+    {
+      var model = _connection.Get<TModel>(id);
+      _connection.Delete(model);
+    }
+    public void Update(TModel model)
+      => _connection.Update(model);
   }
 }
