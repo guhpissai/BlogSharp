@@ -16,7 +16,12 @@ namespace Blog.Screens.TagScreens
       Console.WriteLine("══════════════════════════════════════════════");
       Console.Write(" 👉 Escolha uma opção: ");
 
-      var option = short.Parse(Console.ReadLine()!);
+      if (!short.TryParse(Console.ReadLine(), out short option))
+      {
+        Program.ShowInvalidOption();
+        Load();
+        return;
+      }
 
       switch (option)
       {
@@ -36,18 +41,10 @@ namespace Blog.Screens.TagScreens
           Program.Menu();
           break;
         default:
-          ShowInvalidOption();
+          Program.ShowInvalidOption();
           Load();
           break;
       }
-    }
-
-    public static void ShowInvalidOption()
-    {
-      Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine("\n❌ Opção inválida! Pressione ENTER para tentar novamente...");
-      Console.ResetColor();
-      Console.ReadLine();
     }
   }
 }

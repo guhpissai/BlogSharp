@@ -1,4 +1,5 @@
-﻿using Blog.Screens.TagScreens;
+﻿using Blog;
+using Blog.Screens.TagScreens;
 using Microsoft.Data.SqlClient;
 internal class Program
 {
@@ -6,10 +7,10 @@ internal class Program
     "Data Source=localhost,1433;Initial Catalog=Blog;User ID=sa;Password=A@123456;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
   private static void Main(string[] args)
   {
-    var connection = new SqlConnection(STRINGCONNECTION_STRING);
-    connection.Open();
+    Database.Connection = new SqlConnection(STRINGCONNECTION_STRING);
+    Database.Connection.Open();
     Menu();
-    connection.Close();
+    Database.Connection.Close();
   }
 
   public static void Menu()
@@ -31,13 +32,30 @@ internal class Program
     Console.WriteLine("══════════════════════════════════════════════");
     Console.Write(" 👉 Escolha uma opção: ");
 
-    var option = short.Parse(Console.ReadLine()!);
+    if (!short.TryParse(Console.ReadLine(), out short option))
+    {
+      ShowInvalidOption();
+      Menu();
+      return;
+    }
 
     switch (option)
     {
       case 4:
         MenuTagScreen.Load();
         break;
+      default:
+        ShowInvalidOption();
+        Menu();
+        break;
     }
+  }
+
+  public static void ShowInvalidOption()
+  {
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("\n❌ Opção inválida! Pressione ENTER para tentar novamente...");
+    Console.ResetColor();
+    Console.ReadLine();
   }
 }
