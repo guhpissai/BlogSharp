@@ -9,7 +9,9 @@ namespace Blog.Screens.TagScreens
     public static void Load()
     {
       Console.Clear();
-      Console.WriteLine("========= Criar Tag =========");
+      Console.WriteLine("══════════════════════════════════════════════");
+      Console.WriteLine("                  CRIAR TAG                   ");
+      Console.WriteLine("══════════════════════════════════════════════");
 
       Console.Write("Qual vai ser o nome da tag? ");
       var name = Console.ReadLine();
