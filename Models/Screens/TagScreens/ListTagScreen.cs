@@ -14,28 +14,42 @@ namespace Blog.Screens.TagScreens
     {
       var repository = new Repository<Tag>(Database.Connection);
 
-      var tags = repository.Get();
-
       Console.Clear();
       Console.WriteLine("============ LISTA DE TAGS ==============");
       Console.WriteLine();
 
-      if (tags == null)
+      try
       {
-        Console.WriteLine("Nenhuma tag encontrada");
-      }
-      else
-      {
+        var tags = repository.Get();
+
+        if (tags.Count() == 0 || tags == null)
+        {
+          Console.WriteLine("Nenhuma tag encontrada");
+          Console.WriteLine("Precione ENTER para voltar...");
+          Console.ReadKey();
+          MenuTagScreen.Load();
+          return;
+        }
+
         foreach (var tag in tags)
         {
           Console.WriteLine($"{tag.Name.ToString().PadRight(15)} | {tag.Slug}");
         }
-      }
 
-      Console.WriteLine();
-      Console.WriteLine("Pressione ENTER para voltar...");
-      Console.ReadKey();
-      Program.Menu();
+        Console.WriteLine("");
+        Console.WriteLine("Pressione ENTER para voltar...");
+        Console.ReadKey();
+        Program.Menu();
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("");
+        Console.WriteLine("Erro ao listar Tags");
+        Console.WriteLine(ex.Message);
+        Console.WriteLine("Pressione ENTER para voltar...");
+        Console.ReadKey();
+        Program.Menu();
+      }
     }
   }
 }

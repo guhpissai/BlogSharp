@@ -1,4 +1,5 @@
 ﻿using Blog;
+using Blog.Screens.MenuPostScreen;
 using Blog.Screens.TagScreens;
 using Microsoft.Data.SqlClient;
 internal class Program
@@ -41,6 +42,9 @@ internal class Program
 
     switch (option)
     {
+      case 1:
+        MenuUserScreen.Load();
+        break;
       case 4:
         MenuTagScreen.Load();
         break;

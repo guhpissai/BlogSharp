@@ -4,17 +4,7 @@ namespace Blog.Screens.TagScreens
   {
     public static void Load()
     {
-      Console.Clear();
-      Console.WriteLine("══════════════════════════════════════════════");
-      Console.WriteLine("          🏷️  GESTÃO DE TAGS - MENU           ");
-      Console.WriteLine("══════════════════════════════════════════════");
-      Console.WriteLine(" [1] 📋 Listar Tags");
-      Console.WriteLine(" [2] ✍️  Criar Tag");
-      Console.WriteLine(" [3] ✏️  Atualizar Tag");
-      Console.WriteLine(" [4] ❌ Deletar Tag");
-      Console.WriteLine(" [0] ↩️  Voltar ao Menu Principal");
-      Console.WriteLine("══════════════════════════════════════════════");
-      Console.Write(" 👉 Escolha uma opção: ");
+      Menu.MenuLoad("Tag");
 
       if (!short.TryParse(Console.ReadLine(), out short option))
       {
