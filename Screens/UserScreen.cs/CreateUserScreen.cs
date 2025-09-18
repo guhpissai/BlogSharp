@@ -16,7 +16,7 @@ namespace Blog.Screens.UserScreen
 
       Console.Write("Nome: ");
       var name = Console.ReadLine();
-      var slug = name.ToLower();
+      var slug = name?.ToLower();
 
       Console.Write("E-mail: ");
       var email = Console.ReadLine();

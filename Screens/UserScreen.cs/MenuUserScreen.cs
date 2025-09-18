@@ -26,9 +26,9 @@ namespace Blog.Screens.MenuPostScreen
         case 3:
           UpdateUserScreen.Load();
           break;
-        // case 4:
-        //   DeleteTagScreen.Load();
-        //   break;
+        case 4:
+          DeleteUserScreen.Load();
+          break;
         case 0:
           Program.Menu();
           break;

@@ -15,7 +15,7 @@ namespace Blog.Screens.TagScreens
 
       Console.Write("Qual vai ser o nome da tag? ");
       var name = Console.ReadLine();
-      var slug = name.ToLower();
+      var slug = name?.ToLower();
 
       var tag = new Tag();
       tag.Name = name;

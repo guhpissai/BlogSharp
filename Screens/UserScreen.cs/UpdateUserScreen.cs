@@ -42,7 +42,7 @@ namespace Blog.Screens.UserScreen
 
         Console.Write($"Nome [{user.Name}]: ");
         var name = Console.ReadLine();
-        var slug = name.ToLower();
+        var slug = name?.ToLower();
 
         Console.Write($"E-mail [{user.Email}]: ");
         var email = Console.ReadLine();
