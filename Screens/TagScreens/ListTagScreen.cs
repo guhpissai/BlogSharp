@@ -1,10 +1,12 @@
 using Blog.Models;
 using Blog.Repositories;
+using Blog.Services;
 
 namespace Blog.Screens.TagScreens
 {
   public static class ListTagScreen
   {
+    private static readonly TagService _service = new();
     public static void Load()
     {
       List();
@@ -12,28 +14,20 @@ namespace Blog.Screens.TagScreens
 
     private static void List()
     {
-      var repository = new Repository<Tag>(Database.Connection);
-
       Console.Clear();
       Console.WriteLine("============ LISTA DE TAGS ==============");
       Console.WriteLine();
 
       try
       {
-        var tags = repository.Get();
+        var tags = _service.GetAll();
 
-        if (tags.Count() == 0 || tags == null)
-        {
+        if (!tags.Any())
           Console.WriteLine("Nenhuma tag encontrada");
-          Console.WriteLine("Precione ENTER para voltar...");
-          Console.ReadKey();
-          MenuTagScreen.Load();
-          return;
-        }
 
         foreach (var tag in tags)
         {
-          Console.WriteLine($"{tag.Name.ToString().PadRight(15)} | {tag.Slug}");
+          Console.WriteLine($"{tag.Name,-15} | {tag.Slug}");
         }
 
         Console.WriteLine("");
@@ -44,7 +38,6 @@ namespace Blog.Screens.TagScreens
       catch (Exception ex)
       {
         Console.WriteLine("");
-        Console.WriteLine("Erro ao listar Tags");
         Console.WriteLine(ex.Message);
         Console.WriteLine("Pressione ENTER para voltar...");
         Console.ReadKey();

@@ -1,14 +1,12 @@
-using Blog.Models;
-using Blog.Repositories;
+using Blog.Services;
 
 namespace Blog.Screens.TagScreens
 {
   public static class UpdateTagScreen
   {
+    private static readonly TagService _service = new();
     public static void Load()
     {
-      var repository = new Repository<Tag>(Database.Connection);
-
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
       Console.WriteLine("                ATUALIZAR TAG                 ");
@@ -17,50 +15,30 @@ namespace Blog.Screens.TagScreens
       try
       {
         Console.Write("Id: ");
-
         if (!int.TryParse(Console.ReadLine(), out var tagId))
-        {
-          Console.WriteLine("");
-          Console.WriteLine("Id inválido! Use apenas números");
-          Console.WriteLine("Pressione ENTER para tentar novamente");
-          Console.ReadKey();
-          Load();
-          return;
-        }
+          throw new Exception("Id inválido!");
 
-        var tag = repository.Get(tagId);
-        if (tag == null)
-        {
-          Console.WriteLine("");
-          Console.WriteLine("Tag não encontrada!");
-          Console.WriteLine("Pressione ENTER para tentar novamente");
-          Console.ReadKey();
-          Load();
-          return;
-        }
+        var tag = _service.GetById(tagId);
 
         Console.WriteLine("");
-        Console.WriteLine($"Tag {tag.Name} encontrada");
-        Console.Write("Digite o novo nome: ");
+        Console.Write($"Nome [{tag.Name}]: ");
         var tagName = Console.ReadLine();
 
-        tag.Name = tagName;
-        tag.Slug = tagName?.ToLower();
-
-        repository.Update(tag);
+        _service.Update(tagId, tagName!);
 
         Console.WriteLine("");
         Console.WriteLine($"Tag atualizada com sucesso!");
+        Console.WriteLine("\nPressione ENTER para voltar...");
+        Console.ReadKey();
+        MenuTagScreen.Load();
       }
       catch (Exception ex)
       {
-        Console.WriteLine("\n❌ Ocorreu um erro ao atualizar a Tag.");
-        System.Diagnostics.Debug.WriteLine(ex); // log interno
+        Console.WriteLine($"\n❌ Ocorreu um erro ao atualizar a Tag. (Erro: {ex.Message})");
+        Console.WriteLine("Pressione ENTER para tentar novamente");
+        Console.ReadKey();
+        Load();
       }
-
-      Console.WriteLine("\nPressione ENTER para voltar...");
-      Console.ReadKey();
-      MenuTagScreen.Load();
     }
   }
 }

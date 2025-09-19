@@ -1,11 +1,13 @@
 using Blog.Models;
 using Blog.Repositories;
+using Blog.Services;
 using Dapper.Contrib.Extensions;
 
 namespace Blog.Screens.TagScreens
 {
   public static class CreateTagScreen
   {
+    private static readonly TagService _service = new();
     public static void Load()
     {
       Console.Clear();
@@ -23,8 +25,7 @@ namespace Blog.Screens.TagScreens
 
       try
       {
-        var repository = new Repository<Tag>(Database.Connection);
-        repository.Create(tag);
+        _service.Create(tag);
 
         Console.WriteLine($"Tag {name} criada com sucesso!");
 
@@ -35,9 +36,8 @@ namespace Blog.Screens.TagScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("\n❌ Não foi possível criar a Tag, pressione ENTER para tentar novamente...");
         Console.WriteLine("");
-        Console.WriteLine(ex.Message);
+        Console.WriteLine($"\n❌ Não foi possível criar a Tag, pressione ENTER para tentar novamente... (Erro: {ex.Message})");
         Console.ReadKey();
         Console.Clear();
         Load();
