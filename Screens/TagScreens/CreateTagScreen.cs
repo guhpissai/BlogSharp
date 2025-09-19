@@ -1,7 +1,5 @@
 using Blog.Models;
-using Blog.Repositories;
 using Blog.Services;
-using Dapper.Contrib.Extensions;
 
 namespace Blog.Screens.TagScreens
 {

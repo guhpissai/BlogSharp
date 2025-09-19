@@ -5,12 +5,16 @@ namespace Blog.Services
 {
   public class TagService
   {
-    private readonly Repository<Tag> _repository = new(Database.Connection!);
+    private readonly IRepository<Tag> _repository;
+    public TagService(IRepository<Tag> repository)
+    {
+      _repository = repository;
+    }
 
     public IEnumerable<Tag> GetAll()
     {
       var tags = _repository.Get();
-      return tags ?? Enumerable.Empty<Tag>();
+      return tags ?? [];
     }
 
     public Tag GetById(int id)

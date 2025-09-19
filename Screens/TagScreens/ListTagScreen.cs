@@ -1,5 +1,3 @@
-using Blog.Models;
-using Blog.Repositories;
 using Blog.Services;
 
 namespace Blog.Screens.TagScreens
