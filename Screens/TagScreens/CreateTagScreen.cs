@@ -5,8 +5,7 @@ namespace Blog.Screens.TagScreens
 {
   public static class CreateTagScreen
   {
-    private static readonly TagService _service = new();
-    public static void Load()
+    public static void Load(TagService _service)
     {
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
@@ -38,7 +37,7 @@ namespace Blog.Screens.TagScreens
         Console.WriteLine($"\n❌ Não foi possível criar a Tag, pressione ENTER para tentar novamente... (Erro: {ex.Message})");
         Console.ReadKey();
         Console.Clear();
-        Load();
+        Load(_service);
       }
     }
   }

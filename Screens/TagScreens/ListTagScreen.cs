@@ -4,13 +4,7 @@ namespace Blog.Screens.TagScreens
 {
   public static class ListTagScreen
   {
-    private static readonly TagService _service = new();
-    public static void Load()
-    {
-      List();
-    }
-
-    private static void List()
+    public static void Load(TagService _service)
     {
       Console.Clear();
       Console.WriteLine("============ LISTA DE TAGS ==============");

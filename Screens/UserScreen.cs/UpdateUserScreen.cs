@@ -1,15 +1,14 @@
 using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens.MenuPostScreen;
+using Blog.Services;
 
 namespace Blog.Screens.UserScreen
 {
   public static class UpdateUserScreen
   {
-    public static void Load()
+    public static void Load(UserService _service)
     {
-      var repository = new Repository<User>(Database.Connection);
-
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
       Console.WriteLine("                ATUALIZAR TAG                 ");
@@ -25,18 +24,18 @@ namespace Blog.Screens.UserScreen
           Console.WriteLine("Id inválido! Use apenas números");
           Console.WriteLine("Pressione ENTER para tentar novamente");
           Console.ReadKey();
-          Load();
+          Load(_service);
           return;
         }
 
-        var user = repository.Get(tagId);
+        var user = _service.GetById(tagId);
         if (user == null)
         {
           Console.WriteLine("");
           Console.WriteLine("Usuário não encontrado!");
           Console.WriteLine("Pressione ENTER para tentar novamente");
           Console.ReadKey();
-          Load();
+          Load(_service);
           return;
         }
 
@@ -61,10 +60,10 @@ namespace Blog.Screens.UserScreen
         user.PasswordHash = string.IsNullOrWhiteSpace(email) ? user.Email : email;
         user.Bio = string.IsNullOrWhiteSpace(bio) ? user.Bio : bio;
         user.Image = image;
-        user.Slug = string.Join("-", user.Name.Split(" "))
+        user.Slug = string.Join("-", user.Name!.Split(" "))
                      .ToLower();
 
-        repository.Update(user);
+        _service.Update(user);
 
         Console.WriteLine("");
         Console.WriteLine($"Usuário atualizada com sucesso!");

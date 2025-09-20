@@ -1,3 +1,7 @@
+using Blog.Models;
+using Blog.Repositories;
+using Blog.Services;
+
 namespace Blog.Screens.TagScreens
 {
   public static class MenuTagScreen
@@ -13,19 +17,22 @@ namespace Blog.Screens.TagScreens
         return;
       }
 
+      var repository = new Repository<Tag>(Database.Connection!);
+      var service = new TagService(repository);
+
       switch (option)
       {
         case 1:
-          ListTagScreen.Load();
+          ListTagScreen.Load(service);
           break;
         case 2:
-          CreateTagScreen.Load();
+          CreateTagScreen.Load(service);
           break;
         case 3:
-          UpdateTagScreen.Load();
+          UpdateTagScreen.Load(service);
           break;
         case 4:
-          DeleteTagScreen.Load();
+          DeleteTagScreen.Load(service);
           break;
         case 0:
           Program.Menu();

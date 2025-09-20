@@ -4,8 +4,7 @@ namespace Blog.Screens.TagScreens
 {
   public static class UpdateTagScreen
   {
-    private static readonly TagService _service = new();
-    public static void Load()
+    public static void Load(TagService _service)
     {
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
@@ -37,7 +36,7 @@ namespace Blog.Screens.TagScreens
         Console.WriteLine($"\n❌ Ocorreu um erro ao atualizar a Tag. (Erro: {ex.Message})");
         Console.WriteLine("Pressione ENTER para tentar novamente");
         Console.ReadKey();
-        Load();
+        Load(_service);
       }
     }
   }

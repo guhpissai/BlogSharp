@@ -12,36 +12,30 @@ namespace Blog.Services
     }
 
     public IEnumerable<Tag> GetAll()
-    {
-      var tags = _repository.Get();
-      return tags ?? [];
-    }
+      => _repository.Get();
+
 
     public Tag GetById(int id)
-    {
-      var tag = _repository.Get(id) ?? throw new Exception("Tag não encontrada");
-      return tag;
-    }
+      => _repository.Get(id) ?? throw new Exception("Tag não encontrada");
 
     public void Create(Tag tag)
     {
-      if (string.IsNullOrWhiteSpace(tag.Name))
-        throw new Exception("Nome da tag não pode ser vazio");
+      var existingTag = _repository.Get().Any(t => t.Name == tag.Name);
 
-      var exists = _repository.Get().Any(t => t.Name == tag.Name);
-
-      if (exists)
-        throw new Exception("Ja existe uma tag com esse nome");
+      if (existingTag)
+        throw new Exception("Nome da tag já existe");
 
       _repository.Create(tag);
     }
 
     public void Delete(int id)
     {
-      var tag = _repository.Get(id);
-      if (tag == null)
+      var existingTag = _repository.Get(id);
+
+      if (existingTag == null)
         throw new Exception("Tag não encontrada");
-      _repository.Delete(tag);
+
+      _repository.Delete(existingTag);
     }
 
     public void Update(int id, string name)
@@ -50,6 +44,11 @@ namespace Blog.Services
 
       if (tag == null)
         throw new Exception("Tag não encontrada");
+
+      var existingTag = _repository.Get().Any(t => t.Name == tag.Name && tag.Id != t.Id);
+
+      if (existingTag)
+        throw new Exception("Nome da tag já existe");
 
       tag.Name = name;
       tag.Slug = name.ToLower();

@@ -1,4 +1,6 @@
+using Blog.Repositories;
 using Blog.Screens.UserScreen;
+using Blog.Services;
 
 namespace Blog.Screens.MenuPostScreen
 {
@@ -15,19 +17,22 @@ namespace Blog.Screens.MenuPostScreen
         return;
       }
 
+      var repository = new UserRepository(Database.Connection!);
+      var service = new UserService(repository);
+
       switch (option)
       {
         case 1:
-          ListUserScreen.Load();
+          ListUserScreen.Load(service);
           break;
         case 2:
-          CreateUserScreen.Load();
+          CreateUserScreen.Load(service);
           break;
         case 3:
-          UpdateUserScreen.Load();
+          UpdateUserScreen.Load(service);
           break;
         case 4:
-          DeleteUserScreen.Load();
+          DeleteUserScreen.Load(service);
           break;
         case 0:
           Program.Menu();

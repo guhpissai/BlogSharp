@@ -1,22 +1,21 @@
 using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens.MenuPostScreen;
+using Blog.Services;
 
 namespace Blog.Screens.UserScreen
 {
   public static class ListUserScreen
   {
-    public static void Load()
+    public static void Load(UserService _service)
     {
-      var repository = new Repository<User>(Database.Connection);
-
       Console.Clear();
       Console.WriteLine("============ LISTA DE USUÁRIOS ==============");
       Console.WriteLine();
 
       try
       {
-        var users = repository.Get();
+        var users = _service.GetAll();
 
         if (users == null || users.Count() == 0)
         {
@@ -45,7 +44,7 @@ namespace Blog.Screens.UserScreen
         Console.WriteLine(ex.Message);
         Console.WriteLine("Precione ENTER para tentar novamente...");
         Console.ReadKey();
-        Load();
+        Load(_service);
         return;
       }
     }

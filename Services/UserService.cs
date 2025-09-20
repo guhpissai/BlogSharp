@@ -3,7 +3,7 @@ using Blog.Repositories;
 
 namespace Blog.Services
 {
-  public class UserService
+  public class UserService : IUserService
   {
     private readonly IRepository<User> _repository;
     // Realizando injeção de dependencia

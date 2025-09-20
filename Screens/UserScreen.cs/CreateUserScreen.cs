@@ -1,13 +1,14 @@
 using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens.MenuPostScreen;
+using Blog.Services;
 using Dapper.Contrib.Extensions;
 
 namespace Blog.Screens.UserScreen
 {
   public static class CreateUserScreen
   {
-    public static void Load()
+    public static void Load(UserService _service)
     {
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
@@ -40,8 +41,7 @@ namespace Blog.Screens.UserScreen
 
       try
       {
-        var repository = new Repository<User>(Database.Connection);
-        repository.Create(user);
+        _service.Create(user);
 
         Console.WriteLine($"Usuário {name} criada com sucesso!");
 
@@ -57,7 +57,7 @@ namespace Blog.Screens.UserScreen
         Console.WriteLine(ex.Message);
         Console.ReadKey();
         Console.Clear();
-        Load();
+        Load(_service);
       }
     }
   }

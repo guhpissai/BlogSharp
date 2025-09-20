@@ -4,8 +4,7 @@ namespace Blog.Screens.TagScreens
 {
   public static class DeleteTagScreen
   {
-    private static readonly TagService _service = new();
-    public static void Load()
+    public static void Load(TagService _service)
     {
 
       Console.Clear();
@@ -33,7 +32,7 @@ namespace Blog.Screens.TagScreens
         Console.WriteLine(ex.Message);
         Console.WriteLine("Pressione ENTER para tentar novamente");
         Console.ReadKey();
-        Load();
+        Load(_service);
       }
     }
   }
