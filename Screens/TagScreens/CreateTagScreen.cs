@@ -12,16 +12,16 @@ namespace Blog.Screens.TagScreens
       Console.WriteLine("                  CRIAR TAG                   ");
       Console.WriteLine("══════════════════════════════════════════════");
 
-      Console.Write("Qual vai ser o nome da tag? ");
-      var name = Console.ReadLine();
-      var slug = name?.ToLower();
-
-      var tag = new Tag();
-      tag.Name = name;
-      tag.Slug = slug;
-
       try
       {
+        Console.Write("Qual vai ser o nome da tag? ");
+        var name = Console.ReadLine();
+        var slug = name?.ToLower();
+
+        var tag = new Tag();
+        tag.Name = name;
+        tag.Slug = slug;
+
         _service.Create(tag);
 
         Console.WriteLine($"Tag {name} criada com sucesso!");
