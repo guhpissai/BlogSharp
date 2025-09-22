@@ -27,6 +27,11 @@ namespace Blog.Screens.CategoryScreens
           {
             Console.WriteLine($"{category.Name,-15} | {category.Slug}");
           }
+
+        Console.WriteLine("");
+        Console.WriteLine("Pressione ENTER para voltar...");
+        Console.ReadKey();
+        MenuCategoryScreen.Load();
       }
       catch (Exception ex)
       {

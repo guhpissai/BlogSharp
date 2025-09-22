@@ -26,13 +26,13 @@ namespace Blog.Screens.CategoryScreens
           ListCategoryScreen.Load(service);
           break;
         case 2:
-          ListCategoryScreen.Load(service);
+          CreateCategoryScreen.Load(service);
           break;
         case 3:
-          ListCategoryScreen.Load(service);
+          UpdateCategoryScreen.Load(service);
           break;
         case 4:
-          ListCategoryScreen.Load(service);
+          DeleteCategoryScreen.Load(service);
           break;
         case 0:
           Program.Menu();

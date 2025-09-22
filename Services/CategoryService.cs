@@ -27,18 +27,17 @@ namespace Blog.Services
 
       if (category == null)
       {
-        throw new InvalidOperationException("Categoria não encontrada.");
+        throw new KeyNotFoundException($"Categoria com Id: {id} não encontrado.");
       }
 
       _repository.Delete(category);
     }
 
-    public void Update(Category category)
+    public void Update(int catId, string catName)
     {
-      var categories = _repository.Get();
-
-      if (categories.Any(c => c.Name == category.Name && category.Id != c.Id))
-        throw new InvalidOperationException("Nome da categoria já cadastrada");
+      var category = _repository.Get(catId);
+      category.Name = catName;
+      category.Slug = catName.ToLower();
 
       var updated = _repository.Update(category);
 
