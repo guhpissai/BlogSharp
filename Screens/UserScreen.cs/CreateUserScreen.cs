@@ -1,10 +1,7 @@
 using Blog.Models;
-using Blog.Repositories;
-using Blog.Screens.MenuPostScreen;
 using Blog.Services;
-using Dapper.Contrib.Extensions;
 
-namespace Blog.Screens.UserScreen
+namespace Blog.Screens.UserScreens
 {
   public static class CreateUserScreen
   {

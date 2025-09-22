@@ -6,7 +6,7 @@ namespace Blog.Screens
     {
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
-      Console.WriteLine("          🏷️  GESTÃO DE TAGS - MENU           ");
+      Console.WriteLine($"          🏷️  GESTÃO DE {name.ToUpper()} - MENU           ");
       Console.WriteLine("══════════════════════════════════════════════");
       Console.WriteLine($" [1] 📋 Listar {name}");
       Console.WriteLine($" [2] ✍️  Criar {name}");

@@ -1,9 +1,9 @@
 using Blog.Models;
 using Blog.Repositories;
-using Blog.Screens.MenuPostScreen;
+using Blog.Screens;
 using Blog.Services;
 
-namespace Blog.Screens.UserScreen
+namespace Blog.Screens.UserScreens
 {
   public static class UpdateUserScreen
   {

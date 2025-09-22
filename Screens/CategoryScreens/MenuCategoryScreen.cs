@@ -1,13 +1,14 @@
+using Blog.Models;
 using Blog.Repositories;
 using Blog.Services;
 
-namespace Blog.Screens.UserScreens
+namespace Blog.Screens.CategoryScreens
 {
-  public static class MenuUserScreen
+  public static class MenuCategoryScreen
   {
     public static void Load()
     {
-      Menu.MenuLoad("Usuário");
+      Menu.MenuLoad("Categoria");
 
       if (!short.TryParse(Console.ReadLine(), out short option))
       {
@@ -16,22 +17,22 @@ namespace Blog.Screens.UserScreens
         return;
       }
 
-      var repository = new UserRepository(Database.Connection!);
-      var service = new UserService(repository);
+      var repository = new Repository<Category>(Database.Connection!);
+      var service = new CategoryService(repository);
 
       switch (option)
       {
         case 1:
-          ListUserScreen.Load(service);
+          ListCategoryScreen.Load(service);
           break;
         case 2:
-          CreateUserScreen.Load(service);
+          ListCategoryScreen.Load(service);
           break;
         case 3:
-          UpdateUserScreen.Load(service);
+          ListCategoryScreen.Load(service);
           break;
         case 4:
-          DeleteUserScreen.Load(service);
+          ListCategoryScreen.Load(service);
           break;
         case 0:
           Program.Menu();
