@@ -28,6 +28,9 @@ namespace Blog.Screens.RoleScreens
         case 2:
           CreateRoleScreen.Load(service);
           break;
+        case 3:
+          UpdateRoleScreen.Load(service);
+          break;
         case 4:
           DeleteRoleScreen.Load(service);
           break;
