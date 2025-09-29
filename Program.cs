@@ -1,8 +1,12 @@
 ﻿using Blog;
+using Blog.Models;
+using Blog.Repositories;
+using Blog.Screens;
 using Blog.Screens.CategoryScreens;
 using Blog.Screens.RoleScreens;
 using Blog.Screens.TagScreens;
 using Blog.Screens.UserScreens;
+using Blog.Services;
 using Microsoft.Data.SqlClient;
 internal class Program
 {
@@ -18,6 +22,13 @@ internal class Program
 
   public static void Menu()
   {
+    var repository = new RoleToUserRepository(Database.Connection!);
+    var roleRepository = new Repository<Role>(Database.Connection!);
+    var userRepository = new Repository<User>(Database.Connection!);
+    var service = new RoleToUserService(repository);
+    var userService = new UserService(userRepository);
+    var roleService = new RoleService(roleRepository);
+
     Console.OutputEncoding = System.Text.Encoding.UTF8;
     Console.Title = "📌 Blog Manager";
 
@@ -55,6 +66,9 @@ internal class Program
         break;
       case 4:
         MenuTagScreen.Load();
+        break;
+      case 5:
+        RoleToUserScreen.Load(service, roleService, userService);
         break;
       default:
         ShowInvalidOption();
