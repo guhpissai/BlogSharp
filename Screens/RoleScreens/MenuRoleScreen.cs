@@ -28,6 +28,9 @@ namespace Blog.Screens.RoleScreens
         case 2:
           CreateRoleScreen.Load(service);
           break;
+        case 4:
+          DeleteRoleScreen.Load(service);
+          break;
         default:
           Program.ShowInvalidOption();
           Load();
