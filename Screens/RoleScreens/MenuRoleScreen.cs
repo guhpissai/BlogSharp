@@ -1,6 +1,7 @@
 using Blog.Models;
 using Blog.Repositories;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.RoleScreens
 {
@@ -8,11 +9,11 @@ namespace Blog.Screens.RoleScreens
   {
     public static void Load()
     {
-      Menu.MenuLoad("Pefil");
+      MenuBlog.Load("Pefil");
 
       if (!short.TryParse(Console.ReadLine(), out var option))
       {
-        Program.ShowInvalidOption();
+        ConsoleHelper.ShowInvalidOption();
         Load();
         return;
       }
@@ -35,7 +36,7 @@ namespace Blog.Screens.RoleScreens
           DeleteRoleScreen.Load(service);
           break;
         default:
-          Program.ShowInvalidOption();
+          ConsoleHelper.ShowInvalidOption();
           Load();
           return;
       }

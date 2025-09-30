@@ -2,6 +2,7 @@ using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.UserScreens
 {
@@ -70,13 +71,9 @@ namespace Blog.Screens.UserScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("\n❌ Ocorreu um erro ao atualizar a usuário.");
-        System.Diagnostics.Debug.WriteLine(ex);
+        ConsoleHelper.ShowException(ex.Message);
+        Load(_service);
       }
-
-      Console.WriteLine("\nPressione ENTER para voltar...");
-      Console.ReadKey();
-      MenuUserScreen.Load();
     }
   }
 }

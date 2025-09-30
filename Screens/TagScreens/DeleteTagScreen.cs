@@ -1,4 +1,5 @@
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.TagScreens
 {
@@ -29,9 +30,7 @@ namespace Blog.Screens.TagScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Pressione ENTER para tentar novamente");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
       }
     }

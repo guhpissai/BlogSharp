@@ -1,6 +1,7 @@
 using Blog.Models;
 using Blog.Repositories;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.TagScreens
 {
@@ -8,11 +9,11 @@ namespace Blog.Screens.TagScreens
   {
     public static void Load()
     {
-      Menu.MenuLoad("Tag");
+      MenuBlog.Load("Tag");
 
       if (!short.TryParse(Console.ReadLine(), out short option))
       {
-        Program.ShowInvalidOption();
+        ConsoleHelper.ShowInvalidOption();
         Load();
         return;
       }
@@ -35,10 +36,10 @@ namespace Blog.Screens.TagScreens
           DeleteTagScreen.Load(service);
           break;
         case 0:
-          Program.Menu();
+          MenuScreen.Load();
           break;
         default:
-          Program.ShowInvalidOption();
+          ConsoleHelper.ShowInvalidOption();
           Load();
           break;
       }

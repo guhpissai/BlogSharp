@@ -2,6 +2,7 @@ using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.UserScreens
 {
@@ -45,10 +46,7 @@ namespace Blog.Screens.UserScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Erro ao deletar a Usuário");
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Pressione ENTER para tentar novamente");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
         return;
       }

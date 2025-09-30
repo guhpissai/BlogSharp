@@ -1,5 +1,6 @@
 using Blog.Models;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.RoleScreens
 {
@@ -28,10 +29,7 @@ namespace Blog.Screens.RoleScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("");
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Pressione ENTER para voltar...");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         MenuRoleScreen.Load();
       }
     }

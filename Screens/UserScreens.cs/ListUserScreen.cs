@@ -2,6 +2,7 @@ using Blog.Models;
 using Blog.Repositories;
 using Blog.Screens;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.UserScreens
 {
@@ -39,13 +40,8 @@ namespace Blog.Screens.UserScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("");
-        Console.WriteLine("Erro ao listar usuários");
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Precione ENTER para tentar novamente...");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
-        return;
       }
     }
   }

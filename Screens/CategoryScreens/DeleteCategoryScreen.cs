@@ -1,4 +1,5 @@
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.CategoryScreens
 {
@@ -27,10 +28,7 @@ namespace Blog.Screens.CategoryScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("");
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Pressione ENTER para voltar...");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         MenuCategoryScreen.Load();
       }
     }

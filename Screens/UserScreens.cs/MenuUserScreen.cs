@@ -1,5 +1,6 @@
 using Blog.Repositories;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.UserScreens
 {
@@ -7,11 +8,11 @@ namespace Blog.Screens.UserScreens
   {
     public static void Load()
     {
-      Menu.MenuLoad("Usuário");
+      MenuBlog.Load("Usuário");
 
       if (!short.TryParse(Console.ReadLine(), out short option))
       {
-        Program.ShowInvalidOption();
+        ConsoleHelper.ShowInvalidOption();
         Load();
         return;
       }
@@ -34,10 +35,10 @@ namespace Blog.Screens.UserScreens
           DeleteUserScreen.Load(service);
           break;
         case 0:
-          Program.Menu();
+          MenuScreen.Load();
           break;
         default:
-          Program.ShowInvalidOption();
+          ConsoleHelper.ShowInvalidOption();
           Load();
           break;
       }

@@ -1,5 +1,6 @@
 using Blog.Models;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.TagScreens
 {
@@ -33,10 +34,7 @@ namespace Blog.Screens.TagScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine("");
-        Console.WriteLine($"\n❌ Não foi possível criar a Tag, pressione ENTER para tentar novamente... (Erro: {ex.Message})");
-        Console.ReadKey();
-        Console.Clear();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
       }
     }

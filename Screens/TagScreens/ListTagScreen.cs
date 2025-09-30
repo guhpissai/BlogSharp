@@ -1,4 +1,5 @@
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.TagScreens
 {
@@ -25,15 +26,13 @@ namespace Blog.Screens.TagScreens
         Console.WriteLine("");
         Console.WriteLine("Pressione ENTER para voltar...");
         Console.ReadKey();
-        Program.Menu();
+        MenuScreen.Load();
       }
       catch (Exception ex)
       {
-        Console.WriteLine("");
-        Console.WriteLine(ex.Message);
-        Console.WriteLine("Pressione ENTER para voltar...");
-        Console.ReadKey();
-        Program.Menu();
+        ConsoleHelper.ShowException(ex.Message);
+        Load(_service);
+        MenuScreen.Load();
       }
     }
   }

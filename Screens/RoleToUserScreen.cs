@@ -1,4 +1,5 @@
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens
 {
@@ -18,7 +19,7 @@ namespace Blog.Screens
         Console.WriteLine("Usuário inválido");
         Console.WriteLine("Pressione ENTER para voltar...");
         Console.ReadKey();
-        Program.Menu();
+        MenuScreen.Load();
         return;
       }
 
@@ -36,7 +37,7 @@ namespace Blog.Screens
         Console.WriteLine("Perfil inválido, digite apenas números");
         Console.WriteLine("Pressione ENTER para voltar...");
         Console.ReadKey();
-        Program.Menu();
+        MenuScreen.Load();
         return;
       }
 
@@ -45,13 +46,21 @@ namespace Blog.Screens
         Console.WriteLine("Opção inválida!");
         Console.WriteLine("Pressione ENTER para voltar...");
         Console.ReadKey();
-        Program.Menu();
+        MenuScreen.Load();
         return;
       }
 
       var r = roles.ToList()[option - 1];
 
-      _service.UserToRole(user.Id, r.Id);
+      try
+      {
+        _service.UserToRole(user.Id, r.Id);
+      }
+      catch (Exception ex)
+      {
+        ConsoleHelper.ShowException(ex.Message);
+        MenuScreen.Load();
+      }
     }
   }
 }

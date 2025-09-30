@@ -1,4 +1,5 @@
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.CategoryScreens
 {
@@ -35,9 +36,7 @@ namespace Blog.Screens.CategoryScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"\n❌ Ocorreu um erro ao atualizar a Categoria. (Erro: {ex.Message})");
-        Console.WriteLine("Pressione ENTER para tentar novamente");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
       }
     }

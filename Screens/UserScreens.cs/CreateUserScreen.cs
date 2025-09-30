@@ -1,5 +1,6 @@
 using Blog.Models;
 using Blog.Services;
+using Blog.Utils;
 
 namespace Blog.Screens.UserScreens
 {
@@ -78,9 +79,7 @@ namespace Blog.Screens.UserScreens
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"\n❌ Não foi possível criar o usuário: {ex.Message}");
-        Console.WriteLine("Pressione ENTER para tentar novamente...");
-        Console.ReadKey();
+        ConsoleHelper.ShowException(ex.Message);
         Load(_service);
       }
     }
