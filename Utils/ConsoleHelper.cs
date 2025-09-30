@@ -14,7 +14,7 @@ namespace Blog.Utils
     {
       Console.WriteLine("");
       Console.WriteLine($"Erro: {message}");
-      Console.WriteLine("Pressione ENTER para tentar novamente...");
+      Console.WriteLine("Pressione ENTER para voltar...");
       Console.ReadKey();
     }
   }

@@ -35,7 +35,7 @@ namespace Blog.Screens.TagScreens
       catch (Exception ex)
       {
         ConsoleHelper.ShowException(ex.Message);
-        Load(_service);
+        MenuTagScreen.Load();
       }
     }
   }

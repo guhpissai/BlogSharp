@@ -72,7 +72,7 @@ namespace Blog.Screens.UserScreens
       catch (Exception ex)
       {
         ConsoleHelper.ShowException(ex.Message);
-        Load(_service);
+        MenuUserScreen.Load();
       }
     }
   }
