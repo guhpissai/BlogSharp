@@ -5,7 +5,7 @@ namespace Blog.Screens
 {
   public static class RoleToUserScreen
   {
-    public static void Load(RoleToUserService _service, RoleService _roleService, UserService _userService)
+    public static void Load(UserRoleService _service, RoleService _roleService, UserService _userService)
     {
       Console.Write("Digite o nome do usuário: ");
       var nome = Console.ReadLine();

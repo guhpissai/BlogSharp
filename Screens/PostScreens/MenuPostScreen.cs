@@ -1,5 +1,6 @@
 using Blog.Models;
 using Blog.Repositories;
+using Blog.Screens.PostScreens;
 using Blog.Services;
 using Blog.Utils;
 
@@ -20,6 +21,8 @@ namespace Blog.Screens.RoleScreens
 
       var repository = new Repository<Post>(Database.Connection!);
       var service = new PostService(repository);
+      var categoryService = new CategoryService(new Repository<Category>(Database.Connection!));
+      var userService = new UserService(new UserRepository(Database.Connection!));
 
       switch (option)
       {
@@ -27,7 +30,7 @@ namespace Blog.Screens.RoleScreens
           ListPostScreen.Load(service);
           break;
         case 2:
-          CreatePostScreen.Load(service);
+          CreatePostScreen.Load(service, categoryService, userService);
           break;
         case 3:
           UpdateRPostScreen.Load(service);

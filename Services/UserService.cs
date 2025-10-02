@@ -5,9 +5,9 @@ namespace Blog.Services
 {
   public class UserService : IUserService
   {
-    private readonly IRepository<User> _repository;
+    private readonly IUserRepository _repository;
     // Realizando injeção de dependencia
-    public UserService(IRepository<User> repository)
+    public UserService(IUserRepository repository)
     {
       _repository = repository;
     }
@@ -18,7 +18,7 @@ namespace Blog.Services
     public User GetById(int id)
       => _repository.Get(id) ?? throw new InvalidOperationException("Usuário não encontrado");
 
-    public void Create(User user)
+    public int Create(User user)
     {
 
       var existingUsers = _repository.Get();
@@ -29,10 +29,12 @@ namespace Blog.Services
       if (existingUsers.Any(u => u.Email == user.Email))
         throw new InvalidOperationException("E-mail já utilizado.");
 
-      var rows = _repository.Create(user);
+      var id = _repository.Create(user);
 
-      if (rows == 0)
+      if (id == 0)
         throw new InvalidOperationException("Não foi possivel criar o usuário");
+
+      return int.Parse(id.ToString());
     }
 
     public void Delete(int id)
@@ -70,6 +72,11 @@ namespace Blog.Services
       {
         throw new InvalidOperationException("Usuário não encontrado.");
       }
+    }
+
+    public List<User> GetUsersWithRoles()
+    {
+      return _repository.GetUsersWithRoles();
     }
   }
 }

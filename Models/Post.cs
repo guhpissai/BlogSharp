@@ -1,7 +1,9 @@
 using Blog.Models;
+using Dapper.Contrib.Extensions;
 
-namespace Blog.Repositories
+namespace Blog.Models
 {
+  [Table("Post")]
   public class Post
   {
     public int Id { get; set; }
@@ -9,6 +11,7 @@ namespace Blog.Repositories
     public string? Summary { get; set; }
     public string? Body { get; set; }
     public string? Slug { get; set; }
-    public List<Category> Categories { get; set; } = [];
+    public int? CategoryId { get; set; }
+    public int? AuthorId { get; set; }
   }
 }

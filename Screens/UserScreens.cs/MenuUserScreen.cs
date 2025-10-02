@@ -1,3 +1,4 @@
+using Blog.Models;
 using Blog.Repositories;
 using Blog.Services;
 using Blog.Utils;
@@ -18,21 +19,23 @@ namespace Blog.Screens.UserScreens
       }
 
       var repository = new UserRepository(Database.Connection!);
-      var service = new UserService(repository);
+      var userService = new UserService(repository);
+      var roleService = new RoleService(new Repository<Role>(Database.Connection!));
+      var userRoleService = new UserRoleService(new UserRoleRepository(Database.Connection!));
 
       switch (option)
       {
         case 1:
-          ListUserScreen.Load(service);
+          ListUserScreen.Load(userService);
           break;
         case 2:
-          CreateUserScreen.Load(service);
+          CreateUserScreen.Load(userService, roleService, userRoleService);
           break;
         case 3:
-          UpdateUserScreen.Load(service);
+          UpdateUserScreen.Load(userService);
           break;
         case 4:
-          DeleteUserScreen.Load(service);
+          DeleteUserScreen.Load(userService);
           break;
         case 0:
           MenuScreen.Load();

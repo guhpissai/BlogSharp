@@ -6,7 +6,7 @@ namespace Blog.Screens.UserScreens
 {
   public static class CreateUserScreen
   {
-    public static void Load(UserService _service)
+    public static void Load(UserService _service, RoleService _roleService, UserRoleService _userRoleService)
     {
       Console.Clear();
       Console.WriteLine("══════════════════════════════════════════════");
@@ -29,24 +29,18 @@ namespace Blog.Screens.UserScreens
       Console.Write("Imagem (URL): ");
       var image = Console.ReadLine();
 
-      var availableRoles = new List<Role>
-            {
-                new Role { Name = "Autor" },
-                new Role { Name = "Editor" },
-                new Role { Name = "Leitor" },
-                new Role { Name = "Administrador" },
-            };
+      var availableRoles = _roleService.GetAll();
 
       int option;
       while (true)
       {
         Console.Clear();
         Console.WriteLine("\nEscolha o perfil:");
-        for (int i = 0; i < availableRoles.Count; i++)
-          Console.WriteLine($"[{i + 1}] - {availableRoles[i].Name}");
+        for (int i = 0; i < availableRoles.Count(); i++)
+          Console.WriteLine($"[{i + 1}] - {availableRoles.ElementAt(i).Name}");
 
         if (int.TryParse(Console.ReadLine(), out option) &&
-            option >= 1 && option <= availableRoles.Count)
+            option >= 1 && option <= availableRoles.Count())
         {
           break;
         }
@@ -55,8 +49,9 @@ namespace Blog.Screens.UserScreens
         Console.ReadKey();
       }
 
-      var role = availableRoles[option - 1];
+      var role = availableRoles.ElementAt(option - 1);
       role.Slug = role.Name!.ToLower();
+
 
       var user = new User
       {
@@ -70,7 +65,8 @@ namespace Blog.Screens.UserScreens
 
       try
       {
-        _service.Create(user);
+        var userId = _service.Create(user);
+        _userRoleService.UserToRole(userId, role.Id);
 
         Console.WriteLine($"\n✅ Usuário {name} criado com sucesso!");
         Console.WriteLine("Pressione ENTER para voltar...");

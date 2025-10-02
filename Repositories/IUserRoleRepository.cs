@@ -1,7 +1,7 @@
 namespace Blog.Repositories
 {
-  public interface IRoleToUserRepository
+  public interface IUserRoleRepository
   {
-    void RoleToUser(long userId, int roleId);
+    void Create(long userId, int roleId);
   }
 }

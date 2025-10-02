@@ -3,15 +3,15 @@ using Microsoft.Data.SqlClient;
 
 namespace Blog.Repositories
 {
-  public class RoleToUserRepository : IRoleToUserRepository
+  public class UserRoleRepository : IUserRoleRepository
   {
     private readonly SqlConnection _connection;
-    public RoleToUserRepository(SqlConnection connection)
+    public UserRoleRepository(SqlConnection connection)
     {
       _connection = connection;
     }
 
-    public void RoleToUser(long userId, int roleId)
+    public void Create(long userId, int roleId)
     {
       const string sql = @"
             INSERT INTO [UserRole] (UserId, RoleId)
