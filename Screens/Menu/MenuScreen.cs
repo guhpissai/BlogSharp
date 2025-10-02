@@ -21,9 +21,10 @@ namespace Blog.Screens
       Console.WriteLine(" [2] 🛡️  Gestão de Perfil");
       Console.WriteLine(" [3] 📂 Gestão de Categoria");
       Console.WriteLine(" [4] 🏷️  Gestão de Tag");
-      Console.WriteLine(" [5] 🔗 Vincular Perfil ⇆ Usuário");
-      Console.WriteLine(" [6] 🔗 Vincular Post ⇆ Tag");
-      Console.WriteLine(" [7] 📊 Relatórios");
+      Console.WriteLine(" [5] Gestão de Posts");
+      Console.WriteLine(" [6] 🔗 Vincular Perfil ⇆ Usuário");
+      Console.WriteLine(" [7] 🔗 Vincular Post ⇆ Tag");
+      Console.WriteLine(" [8] 📊 Relatórios");
       Console.WriteLine("══════════════════════════════════════════════");
       Console.Write(" 👉 Escolha uma opção: ");
 
@@ -48,7 +49,7 @@ namespace Blog.Screens
           MenuTagScreen.Load();
           break;
         case 5:
-          // RoleToUserScreen.Load(service, roleService, userService);
+          MenuPostScreen.Load();
           break;
         default:
           Load();
