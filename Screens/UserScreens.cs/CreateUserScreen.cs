@@ -45,13 +45,13 @@ namespace Blog.Screens.UserScreens
           break;
         }
 
-        Console.WriteLine("\nOpção inválida! Pressione ENTER para tentar novamente...");
-        Console.ReadKey();
+        ConsoleHelper.ShowInvalidOption();
+        MenuUserScreen.Load();
+        return;
       }
 
       var role = availableRoles.ElementAt(option - 1);
       role.Slug = role.Name!.ToLower();
-
 
       var user = new User
       {

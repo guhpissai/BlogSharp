@@ -1,6 +1,3 @@
-using Blog.Models;
-using Blog.Repositories;
-using Blog.Screens;
 using Blog.Services;
 using Blog.Utils;
 
@@ -32,17 +29,18 @@ namespace Blog.Screens.UserScreens
         var user = _service.GetById(userId);
         if (user == null)
         {
-          Console.WriteLine("");
-          Console.WriteLine("Usuário não encontrado!");
-          Console.WriteLine("Pressione ENTER para tentar novamente");
-          Console.ReadKey();
+          ConsoleHelper.ShowException("Usuário não encontrado!");
           Load(_service);
           return;
         }
 
         _service.Delete(userId);
 
+        Console.WriteLine("");
         Console.WriteLine($"Usuário {user.Name} deletado com sucesso!");
+        Console.WriteLine("Pressione ENTER para voltar ao menu...");
+        Console.ReadKey();
+        MenuUserScreen.Load();
       }
       catch (Exception ex)
       {

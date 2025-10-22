@@ -2,7 +2,6 @@ using Blog.Screens.CategoryScreens;
 using Blog.Screens.RoleScreens;
 using Blog.Screens.TagScreens;
 using Blog.Screens.UserScreens;
-using Microsoft.Data.SqlClient;
 
 namespace Blog.Screens
 {
@@ -21,10 +20,8 @@ namespace Blog.Screens
       Console.WriteLine(" [2] 🛡️  Gestão de Perfil");
       Console.WriteLine(" [3] 📂 Gestão de Categoria");
       Console.WriteLine(" [4] 🏷️  Gestão de Tag");
-      Console.WriteLine(" [5] Gestão de Posts");
-      Console.WriteLine(" [6] 🔗 Vincular Perfil ⇆ Usuário");
-      Console.WriteLine(" [7] 🔗 Vincular Post ⇆ Tag");
-      Console.WriteLine(" [8] 📊 Relatórios");
+      Console.WriteLine(" [5] 📝 Gestão de Posts");
+      Console.WriteLine(" [6] 📊 Relatórios");
       Console.WriteLine("══════════════════════════════════════════════");
       Console.Write(" 👉 Escolha uma opção: ");
 
@@ -50,6 +47,9 @@ namespace Blog.Screens
           break;
         case 5:
           MenuPostScreen.Load();
+          break;
+        case 6:
+          MenuReportScreen.Load();
           break;
         default:
           Load();
